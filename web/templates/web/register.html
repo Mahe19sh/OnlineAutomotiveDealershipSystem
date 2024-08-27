@@ -1,0 +1,45 @@
+{% extends 'web/base_alt.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}Register{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css_style.default.css' %}" id="theme-stylesheet">
+{% endblock %}
+{% block menu %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link js-scroll-trigger" href="{% url 'web:login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll-trigger active" href="{% url 'web:register' %}">Register</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="card" style="margin-top: 1em">
+                <div class="card-body">
+                    <h3>Register</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form role="form" action="{% url 'web:register'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form uform %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success" id="register">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    Already have an account? <a href="{% url 'web:login' %}">Click here</a> to login!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
